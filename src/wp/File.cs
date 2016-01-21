@@ -377,13 +377,10 @@ namespace WPCordovaClassLib.Cordova.Commands
                 if(filePath.Contains(" ")) 
                 {
                     Debug.WriteLine("FilePath with spaces :: " +  filePath);
-                }
-
-                using (IsolatedStorageFile isoFile = IsolatedStorageFile.GetUserStoreForApplication())
-                {
+                }                
                     IsResource = bIsRes;
-                    IsFile = isoFile.FileExists(filePath);
-                    IsDirectory = isoFile.DirectoryExists(filePath);
+                    IsFile = new System.IO.FileInfo(filePath).Exists;
+                    IsDirectory = new System.IO.DirectoryInfo(filePath).Exists;
                     if (IsFile)
                     {
                         this.Name = Path.GetFileName(filePath);
@@ -416,7 +413,6 @@ namespace WPCordovaClassLib.Cordova.Commands
                     {
                         this.FullPath = filePath;
                     }
-                }
             }
 
             /// <summary>
